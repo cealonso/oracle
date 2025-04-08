@@ -12,3 +12,7 @@ select * from employees where salary=9000;
 ```sql
 select * from employees where salary>9000;
 ```
+
+```sql
+select * from employees where salary>=9000 order by salary;
+```
