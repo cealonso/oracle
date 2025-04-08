@@ -5,5 +5,5 @@ Este repositorio forma parte del curso de Oracle dictado en el año 2025 en el C
 ## Clase 03/04
 
 ```sql
-select * from employees where salary=9000 
+select * from employees where salary=9000;
 ```
