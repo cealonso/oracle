@@ -7,3 +7,8 @@ Este repositorio forma parte del curso de Oracle del año 2025 dictado en el C.F
 ```sql
 select * from employees where salary=9000;
 ```
+## Clase 03/04
+
+```sql
+select * from employees where salary>9000;
+```
