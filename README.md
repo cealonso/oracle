@@ -46,3 +46,6 @@ select * from employees where manager_id in (100,101,103) order by last_name;
 select count(employee_id) from employees;
 ```
 
+```sql
+select count(manager_id) as "cantidad de empleados" from employees;
+```
