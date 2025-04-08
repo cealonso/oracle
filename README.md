@@ -66,3 +66,7 @@ select last_name, max(salary) from employees;
 ```sql
 select min(salary) from employees;
 ```
+
+```sql
+select round(avg(salary),2) from employees
+```
