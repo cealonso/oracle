@@ -60,6 +60,9 @@ select count(*) as "Cantidad" from employees where last_name in ('Grant','Willia
 
 ```sql
 A resolver (Pensarlo mas adelante), ERROR: ORA-00937: la función de grupo no es de grupo único
-select last_name, max(salary) from employees
+select last_name, max(salary) from employees;
 ```
 
+```sql
+select min(salary) from employees;
+```
