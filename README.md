@@ -49,3 +49,7 @@ select count(employee_id) from employees;
 ```sql
 select count(manager_id) as "cantidad de empleados" from employees;
 ```
+
+```sql
+select count(*) as "Cantidad de Taylor" from employees where last_name='Taylor';
+```
