@@ -50,9 +50,9 @@ select * from employees where salary>=9000 order by salary desc;
 ```
 
 ```sql
-select * from employees where salary between 9000 and 12000 order by salary
+select * from employees where salary between 9000 and 12000 order by salary;
 ```
 
 ```sql
-select * from employees where not salary=9000
+select * from employees where not salary=9000;
 ```
