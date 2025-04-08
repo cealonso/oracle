@@ -35,5 +35,5 @@ select * from employees where salary<>9000 order by salary;
 ```
 
 ```sql
-select * from employees where manager_id=101 or manager_id=103 order by last_name
+select * from employees where manager_id=101 or manager_id=103 order by last_name;
 ```
