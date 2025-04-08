@@ -41,3 +41,8 @@ select * from employees where manager_id=101 or manager_id=103 order by last_nam
 ```sql
 select * from employees where manager_id in (100,101,103) order by last_name;
 ```
+
+```sql
+select count(employee_id) from employees;
+```
+
