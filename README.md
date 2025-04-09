@@ -68,5 +68,9 @@ select min(salary) from employees;
 ```
 
 ```sql
-select round(avg(salary),2) from employees
+select round(avg(salary),2) from employees;
+```
+
+```sql
+select sum(salary) from employees where job_id='IT_PROG';
 ```
