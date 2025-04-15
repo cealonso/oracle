@@ -99,4 +99,7 @@ select lower(first_name)|| ',' || upper(last_name) as "Nombre y Apellido",hire_d
 
 ```
 
+```sql
+select rpad(last_name, 25, '.')  || lpad(salary, 10, '.') as "Listado de Salarios" from employees;
+```
 
