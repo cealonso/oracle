@@ -106,3 +106,7 @@ select rpad(last_name, 25, '.')  || lpad(salary, 10, '.') as "Listado de Salario
 ```sql
 select first_name,last_name from employees where (first_name like 'S%') or (last_name like'S%');
 ```
+
+```sql
+select job_id,sum(salary) from employees group by job_id having job_id='IT_PROG';
+```
