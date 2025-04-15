@@ -85,3 +85,11 @@ select job_id,sum(salary) from employees where job_id='IT_PROG';
 ```sql
 select to_char(hire_date,'YYYY') from employees;
 ```
+
+```sql
+Ejercicio: Devolver los nombres, apellidos, año de contratación y salario de los empleados que cumplan estas condiciones 1°) El año de contratación sea el año 2015,
+2°) El salario se encuentre entre los 6000 y 15000 dólares 3°) Los salarios esten ordenados en forma ascendente.
+
+select first_name,last_name,job_id,to_char(hire_date,'YYYY'),salary from employees where to_char(hire_date,'YYYY')='2015' and salary between 6000 and 15000 order by salary;
+```
+
