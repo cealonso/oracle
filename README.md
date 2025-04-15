@@ -93,7 +93,7 @@ select first_name,last_name,job_id,to_char(hire_date,'YYYY'),salary from employe
 ```
 
 ```sql
-Ejercicio: Devolver el nombre del empleado en minúscula (usar la función lower()) concatenado con el apellido del mismo en mayúscula  (usar la función upper()). El titulo de la columna debe ser Nombre y Apellido. En otra columna mostrar la fecha de contratación del empleado. Listar toda esa información ordenada por fecha de contratación.
+Ejercicio: Devolver el nombre del empleado en minúscula (usar la función lower()) concatenado con el apellido del mismo en mayúscula  (usar la función upper()). El título de la columna debe ser Nombre y Apellido. En otra columna mostrar la fecha de contratación del empleado. Listar toda esa información ordenada por fecha de contratación.
 
 
 ```
