@@ -103,3 +103,6 @@ select lower(first_name)|| ',' || upper(last_name) as "Nombre y Apellido",hire_d
 select rpad(last_name, 25, '.')  || lpad(salary, 10, '.') as "Listado de Salarios" from employees;
 ```
 
+```sql
+select first_name,last_name from employees where first_name like 'S%' or last_name like'S%';
+```
