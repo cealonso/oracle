@@ -110,3 +110,7 @@ select first_name,last_name from employees where (first_name like 'S%') or (last
 ```sql
 select job_id,sum(salary) from employees group by job_id having job_id='IT_PROG';
 ```
+
+```sql
+select job_id,count(*), avg(salary), max(salary)-min(salary) "diferencia de salarios" from employees group by job_id;
+```
