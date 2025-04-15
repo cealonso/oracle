@@ -79,3 +79,9 @@ select sum(salary) from employees where job_id='IT_PROG';
 A resolver (Pensarlo mas adelante), ERROR: ORA-00937: la función de grupo no es de grupo único
 select job_id,sum(salary) from employees where job_id='IT_PROG';
 ```
+
+## Clase 15/04
+
+```sql
+select to_char(hire_date,'YYYY') from employees;
+```
