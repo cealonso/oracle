@@ -114,3 +114,7 @@ select job_id,sum(salary) from employees group by job_id having job_id='IT_PROG'
 ```sql
 select job_id,count(*), avg(salary), max(salary)-min(salary) "diferencia de salarios" from employees group by job_id;
 ```
+
+```sql
+select job_id as "Puesto laboral",count(*) as "cantidad de empleados", avg(salary) as promedio, min(salary) as "salario mas chico", max(salary) as "salario mas grande", max(salary)-min(salary) "diferencia de salarios" from employees group by job_id;
+```
