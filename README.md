@@ -108,6 +108,12 @@ select first_name,last_name from employees where (first_name like 'S%') or (last
 ```
 
 ```sql
+
+Clase: 08/04. A resolver (Pensarlo mas adelante), ERROR: ORA-00937: la función de grupo no es de grupo único
+select job_id,sum(salary) from employees where job_id='IT_PROG';
+
+Solución:
+
 select job_id,sum(salary) from employees group by job_id having job_id='IT_PROG';
 ```
 
