@@ -130,3 +130,8 @@ select job_id as "Puesto laboral",count(*) as "cantidad de empleados", avg(salar
 ```sql
 select manager_id,COUNT(*) from employees group by manager_id order by manager_id;
 ```
+
+```sql
+Nota: Oracle23Free
+select manager_id,count(employee_id) as "cantidad de empleados" from employees group by manager_id order by "cantidad de empleados" desc;
+```
