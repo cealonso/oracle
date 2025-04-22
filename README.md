@@ -124,3 +124,5 @@ select job_id,count(*), avg(salary), max(salary)-min(salary) "diferencia de sala
 ```sql
 select job_id as "Puesto laboral",count(*) as "cantidad de empleados", avg(salary) as promedio, min(salary) as "salario mas chico", max(salary) as "salario mas grande", max(salary)-min(salary) "diferencia de salarios" from employees group by job_id;
 ```
+
+## Clase 22/04
