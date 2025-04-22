@@ -148,3 +148,7 @@ select count(location_id) "localidad", country_id from locations group by countr
 ```sql
 select count(location_id) "localidad", country_id from locations where country_id='US' group by country_id;
 ```
+
+```sql
+select employee_id from job_history group by employee_id having count(*) > 1
+```
