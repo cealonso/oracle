@@ -134,4 +134,5 @@ select manager_id,COUNT(*) from employees group by manager_id order by manager_i
 ```sql
 Nota: Oracle23Free
 select manager_id,count(employee_id) as "cantidad de empleados" from employees group by manager_id order by "cantidad de empleados" desc;
+select manager_id,count(employee_id) as "cantidad de empleados" from employees group by manager_id order by 2 desc;
 ```
