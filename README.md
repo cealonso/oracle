@@ -136,3 +136,7 @@ Nota: Oracle23Free
 select manager_id,count(employee_id) as "cantidad de empleados" from employees group by manager_id order by "cantidad de empleados" desc;
 select manager_id,count(employee_id) as "cantidad de empleados" from employees group by manager_id order by 2 desc;
 ```
+
+```sql
+select manager_id,count(employee_id) as "cantidad de empleados" from employees group by manager_id order by 2 desc fetch first 1 rows only;
+```
