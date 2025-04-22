@@ -150,5 +150,9 @@ select count(location_id) "localidad", country_id from locations where country_i
 ```
 
 ```sql
-select employee_id from job_history group by employee_id having count(*) > 1
+select employee_id from job_history group by employee_id having count(*) > 1;
+```
+
+```sql
+select department_id, to_char(hire_date, 'YYYY'), count(employee_id) from employees group by department_id, to_char(hire_date, 'YYYY') order by department_id;
 ```
