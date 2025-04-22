@@ -140,3 +140,7 @@ select manager_id,count(employee_id) as "cantidad de empleados" from employees g
 ```sql
 select manager_id,count(employee_id) as "cantidad de empleados" from employees group by manager_id order by 2 desc fetch first 1 rows only;
 ```
+
+```sql
+select count(location_id) "localidad", country_id from locations group by country_id;
+```
