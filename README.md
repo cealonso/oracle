@@ -144,3 +144,7 @@ select manager_id,count(employee_id) as "cantidad de empleados" from employees g
 ```sql
 select count(location_id) "localidad", country_id from locations group by country_id;
 ```
+
+```sql
+select count(location_id) "localidad", country_id from locations where country_id='US' group by country_id;
+```
