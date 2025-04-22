@@ -126,3 +126,7 @@ select job_id as "Puesto laboral",count(*) as "cantidad de empleados", avg(salar
 ```
 
 ## Clase 22/04
+
+```sql
+select manager_id,COUNT(*) from employees group by manager_id order by manager_id;
+```
