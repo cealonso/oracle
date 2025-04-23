@@ -160,3 +160,11 @@ select department_id, to_char(hire_date, 'YYYY'), count(employee_id) from employ
 ```sql
 select distinct department_id from employees order by department_id;
 ```
+
+```sql
+A resolver (Pensarlo mas adelante), ERROR: ORA-00937: la función de grupo no es de grupo único
+select last_name, max(salary) from employees;
+
+Solución:
+select initcap(last_name),salary from employees where salary=(select max(salary) from employees);
+```
