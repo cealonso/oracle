@@ -174,3 +174,7 @@ select initcap(last_name),salary from employees where salary=(select max(salary)
 ```sql
 select initcap(last_name) as Apellido, salary  as salario from employees where salary>(select avg(salary) from employees) order by last_name
 ```
+
+```sql
+select last_name, job_id, employees.department_id, department_name from employees,departments where departments.department_id=employees.department_id;
+```
