@@ -168,3 +168,9 @@ select last_name, max(salary) from employees;
 Solución:
 select initcap(last_name),salary from employees where salary=(select max(salary) from employees);
 ```
+
+## Clase 242/04
+
+```sql
+select initcap(last_name) as Apellido, salary  as salario from employees where salary>(select avg(salary) from employees) order by last_name
+```
