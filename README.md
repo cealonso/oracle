@@ -182,3 +182,7 @@ select last_name, job_id, employees.department_id, department_name from employee
 ```sql
 select last_name, job_id, employees.department_id, department_name from employees,departments where departments.department_id=employees.department_id order by last_name;
 ```
+
+```sql
+select last_name, job_id, employees.department_id, department_name from employees,departments where departments.department_id=employees.department_id and job_id = 'SA_MAN' order by last_name;
+```
