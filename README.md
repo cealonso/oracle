@@ -195,5 +195,6 @@ Ejercicio: Self Join
 
 select employee_id,last_name,manager_id from employees where last_name like 'R%'-- Rajs tiene como jefe a 124 y Rogers tiene como jefe a 122
 select employee_id,last_name from employees where employee_id=124 or employee_id=122 -- 122 es Kaufling y 124 Mourgos
+select e1.last_name,e2.last_name from employees e1,employees e2 where e1.manager_id = e2.employee_id and e1.last_name LIKE 'R%' 
 
 ```
