@@ -184,5 +184,14 @@ select last_name, job_id, employees.department_id, department_name from employee
 ```
 
 ```sql
+Ejercicio: Inner Join
+
 select last_name, job_id, employees.department_id, department_name from employees,departments where departments.department_id=employees.department_id and job_id = 'SA_MAN' order by last_name;
+```
+
+```sql
+
+Ejercicio: Self Join
+select employee_id,last_name,manager_id from employees where last_name like 'R%'-- Rajs tiene como jefe a 124 y Rogers tiene como jefe a 122
+
 ```
