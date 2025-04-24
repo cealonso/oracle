@@ -192,6 +192,7 @@ select last_name, job_id, employees.department_id, department_name from employee
 ```sql
 
 Ejercicio: Self Join
+
 select employee_id,last_name,manager_id from employees where last_name like 'R%'-- Rajs tiene como jefe a 124 y Rogers tiene como jefe a 122
 
 ```
