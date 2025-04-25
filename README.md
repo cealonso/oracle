@@ -199,5 +199,5 @@ select e1.last_name,e2.last_name from employees e1,employees e2 where e1.manager
 select e1.last_name||' trabaja para el gerente '||e2.last_name "Empleados y Gerentes" from employees e1,employees e2 where e1.manager_id = e2.employee_id;
 select e1.last_name||' trabaja para el gerente '||e2.last_name "Empleados y Gerentes", e1.salary " Salario del empleado", e2.salary "Salario del Gerente" from employees e1, employees e2 where e1.manager_id = e2.employee_id order by e1.last_name;
 
-Atención: Modificar salario de los empleados cuyo apellido es Abel y el otro apellido es Ozer.
+Atención: Modificar los salarios de los empleados Abel y  Ozer.
 ```
