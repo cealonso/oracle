@@ -210,3 +210,8 @@ select e.first_name,j.job_title,d.department_name from employees e,jobs j,depart
 (ANSI-SQL)
 select e.first_name,j.job_title,d.department_name from employees e inner join jobs j  on e.job_id=j.job_id inner join departments d on e.department_id=d.department_id;
 ```
+
+```sql
+select e.first_name,j.job_title,d.department_name from employees e,jobs j,departments d where e.job_id=j.job_id and e.department_id=d.department_id and to_char(e.hire_date,'dd') = '10' and to_char(e.hire_date,'mm') = '03';
+```
+
