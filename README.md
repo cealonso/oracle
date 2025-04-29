@@ -205,7 +205,7 @@ Atención: Modificar los salarios de los empleados Abel y  Ozer.
 ## Clase 29/04
 
 ```sql
-(NO ANSI-SQL)
+(NO ANSI-SQL/ORACLE)
 select e.first_name,j.job_title,d.department_name from employees e,jobs j,departments d where e.job_id=j.job_id and e.department_id=d.department_id;
 (ANSI-SQL)
 select e.first_name,j.job_title,d.department_name from employees e inner join jobs j  on e.job_id=j.job_id inner join departments d on e.department_id=d.department_id;
