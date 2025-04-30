@@ -216,7 +216,7 @@ select e.first_name,j.job_title,d.department_name from employees e,jobs j,depart
 ```
 
 ```sql
-  Left Join
+  Left Join (NO ANSI SQL/ORACLE)
   select emps.employee_id,
          emps.first_name,
          jh.department_id,
@@ -227,7 +227,7 @@ select e.first_name,j.job_title,d.department_name from employees e,jobs j,depart
 ```
 
 ```sql
-Right Join
+Right Join (NO ANSI SQL/ORACLE)
  select emps.employee_id,
          emps.first_name,
          jh.department_id,
