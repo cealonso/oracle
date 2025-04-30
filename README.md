@@ -236,3 +236,16 @@ Right Join (NO ANSI SQL/ORACLE)
   from   employees emps, job_history jh
   where  emps.employee_id(+) = jh.employee_id;
 ```
+
+```sql
+Left Join (Ansi SQL)
+select e.employee_id, e.last_name, d.department_name
+from employees e
+left outer join departments d on e.department_id = d.department_id;
+
+Right Join (Ansi SQL)
+
+select e.employee_id, e.last_name, d.department_name
+from employees e
+right outer join departments d on e.department_id = d.department_id;
+``` 
