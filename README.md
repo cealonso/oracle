@@ -216,6 +216,7 @@ select e.first_name,j.job_title,d.department_name from employees e,jobs j,depart
 ```
 
 ```sql
+  Left Join
   select emps.employee_id,
          emps.first_name,
          jh.department_id,
@@ -223,4 +224,15 @@ select e.first_name,j.job_title,d.department_name from employees e,jobs j,depart
          jh.end_date
   from   employees emps, job_history jh
   where  emps.employee_id = jh.employee_id(+);
+```
+
+```sql
+Right Join
+ select emps.employee_id,
+         emps.first_name,
+         jh.department_id,
+         jh.start_date,
+         jh.end_date
+  from   employees emps, job_history jh
+  where  emps.employee_id(+) = jh.employee_id;
 ```
