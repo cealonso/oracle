@@ -215,3 +215,12 @@ select e.first_name,j.job_title,d.department_name from employees e inner join jo
 select e.first_name,j.job_title,d.department_name from employees e,jobs j,departments d where e.job_id=j.job_id and e.department_id=d.department_id and to_char(e.hire_date,'dd') = '10' and to_char(e.hire_date,'mm') = '03';
 ```
 
+```sql
+  select emps.employee_id,
+         emps.first_name,
+         jh.department_id,
+         jh.start_date,
+         jh.end_date
+  from   employees emps, job_history jh
+  where  emps.employee_id = jh.employee_id(+);
+```
