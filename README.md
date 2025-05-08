@@ -268,4 +268,11 @@ Quiero que me muestres en un artefacto los job_title de la tabla jobs, el first_
 en oracle sql usando el esquema human resources
 ```
 
+```sql
 
+De la clase 24/04 modifico el salario de Zlotkey asi no tiene menos salario que su empleado.
+
+update employees set salary=18000 where employee_id=149;
+
+select salary from employees where employee_id=149;
+```
