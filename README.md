@@ -259,3 +259,13 @@ from employees e
 full outer join departments d on e.department_id = d.department_id;
 
 ```
+
+```sql
+
+Uso de IA con claude.ai
+
+Quiero que me muestres en un artefacto los job_title de la tabla jobs, el first_name y el last_name de la tabla employees y el department_name de la tabla departments 
+en oracle sql usando el esquema human resources
+```
+
+
