@@ -275,4 +275,9 @@ De la clase 24/04 modifico el salario de Zlotkey asi no tiene menos salario que 
 update employees set salary=18000 where employee_id=149;
 
 select salary from employees where employee_id=149;
+
+
+update employees set salary=19000 where employee_id=148;
+
+select salary from employees where employee_id=148;
 ```
