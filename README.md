@@ -281,3 +281,8 @@ update employees set salary=19000 where employee_id=148;
 
 select salary from employees where employee_id=148;
 ```
+
+```sql
+insert into jobs (job_id,job_title,min_salary,max_salary) values ('DBA','Admin Databases',20000,30000);
+insert into jobs (job_id,job_title,min_salary,max_salary) values ('BOGA','ABOGADO',15000,25000);
+```
