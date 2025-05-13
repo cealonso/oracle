@@ -286,3 +286,20 @@ select salary from employees where employee_id=148;
 insert into jobs (job_id,job_title,min_salary,max_salary) values ('DBA','Admin Databases',20000,30000);
 insert into jobs (job_id,job_title,min_salary,max_salary) values ('BOGA','ABOGADO',15000,25000);
 ```
+
+## Clase 13/05
+
+```sql
+insert into jobs(job_id,job_title,min_salary,max_salary) values ('PROG_JR','Developer Junior',6500,9000);
+commit;
+```
+  
+```sql
+insert into jobs values ('TEST','Testing Developer',5000,7000);  
+commit;
+```
+
+```sql
+insert into countries values ('SK','South Korea',30),('SA','South Africa',50),('CL','Chile',20);
+commit;
+```
