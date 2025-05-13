@@ -303,3 +303,9 @@ commit;
 insert into countries values ('SK','South Korea',30),('SA','South Africa',50),('CL','Chile',20);
 commit;
 ```
+
+```sql
+select * from employees where upper(last_name)=upper('James');
+insert into employees values(300,'Erik','Spencer','ESPENCER','1.650.555.0999',SYSDATE,'PROG_JR',7500,NULL,103,60);
+commit;
+```
