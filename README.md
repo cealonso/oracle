@@ -353,6 +353,9 @@ select JSON_SERIALIZE(i.data PRETTY) from instructors i;
 
 ```sql
 select i.data.last_name,i.data.email from instructors i;
+```
 
+```sql
+select json_serialize(i.data PRETTY) FROM instructors i where json_value(i.data, '$.last_name') = 'Gray';
 ```
 
