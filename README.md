@@ -351,5 +351,8 @@ select JSON_SERIALIZE(i.data PRETTY) from instructors i;
 
 ```
 
+```sql
+select i.data.last_name,i.data.email from instructors i;
 
+```
 
