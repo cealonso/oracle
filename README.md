@@ -371,3 +371,20 @@ CONSTRAINT pk_course_id PRIMARY KEY (course_id),
 CONSTRAINT chk_dates CHECK (start_date <= end_date)
 );
 ```
+## Clase 22/05
+
+```sql
+alter table courses MODIFY course_name varchar2(50); 
+```
+
+```sql
+alter table courses MODIFY start_date date default sysdate; 
+```
+
+```sql
+alter table courses ADD difficultylevel varchar2(20);
+```
+
+```sql
+alter table courses ADD CONSTRAINT chk_difficultylevel CHECK (difficultylevel in ('low','medium','high')); 
+```
