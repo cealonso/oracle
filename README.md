@@ -400,3 +400,15 @@ OK.
 insert into employees_courses values('',102,1,FALSE);
 ```
 
+```sql
+
+select  first_name,last_name,salary,
+case 
+when salary<6000 then 'Salario Bajo' 
+when salary>=6000 and salary<10000 then 'Salario Medio'
+else 'Salario Alto'
+end as "Tipo de Salario"
+from employees order by salary asc;
+
+```
+
