@@ -388,3 +388,15 @@ alter table courses ADD difficultylevel varchar2(20);
 ```sql
 alter table courses ADD CONSTRAINT chk_difficultylevel CHECK (difficultylevel in ('low','medium','high')); 
 ```
+## Clase 27/05
+
+```sql
+ERROR: ORA-02291: restricción de integridad (HR_ADMIN.FK_COURSE_ID) violada - clave principal no encontrada
+insert into employees_courses values('',102,999,FALSE);
+```
+
+```sql
+OK.
+insert into employees_courses values('',102,1,FALSE);
+```
+
