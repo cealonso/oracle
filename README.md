@@ -422,22 +422,22 @@ from courses;
 ```
 
 ```sql
- SELECT
+ select
     e.employee_id,
     e.first_name || ' ' || e.last_name AS empleado,
     TO_CHAR(e.hire_date, 'YYYY') AS año_contratación,
-    CASE
+    case
         WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM e.hire_date) < 5 THEN 'Novato'
         WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM e.hire_date) < 10 THEN 'Semi senior'
         WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM e.hire_date) < 15 THEN 'Senior'
         ELSE 'Experto' -- Added a category for those with 15+ years
-    END AS nivel,
+    end as nivel,
     d.department_name
-FROM
+from
     employees e
-INNER JOIN
+inner join
     departments d ON e.department_id = d.department_id
-ORDER BY
+order by
     empleado; 
 
 ```
