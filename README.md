@@ -415,7 +415,7 @@ from employees order by salary asc;
 ```sql
 select course_name,difficultylevel, 
 case 
-when difficultylevel='low' THEN 'Sin requisitos' 
+when difficultylevel='low' then 'Sin requisitos' 
 else 'Con requisitos' 
 end "Requisitos" 
 from courses;
