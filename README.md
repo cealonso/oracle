@@ -422,17 +422,22 @@ from courses;
 ```
 
 ```sql
-select 
-e.employee_id, 
-e.first_name || ' ' || e.last_name AS empleado, 
-TO_CHAR(e.hire_date, 'YYYY') AS año_contratación, 
-case 
-when MONTHS_BETWEEN(SYSDATE, e.hire_date)/12 < 5 then 'Novato' 
-when MONTHS_BETWEEN(SYSDATE, e.hire_date)/12 < 10 then 'Semi senior' 
-else 'Senior' 
-end as "EXPERIENCIA LABORAL", 
-d.department_name 
-from employees e inner join departments d  
-on e.department_id=d.department_id 
-order by e.first_name;
+ SELECT
+    e.employee_id,
+    e.first_name || ' ' || e.last_name AS empleado,
+    TO_CHAR(e.hire_date, 'YYYY') AS año_contratación,
+    CASE
+        WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM e.hire_date) < 5 THEN 'Novato'
+        WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM e.hire_date) < 10 THEN 'Semi senior'
+        WHEN EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM e.hire_date) < 15 THEN 'Senior'
+        ELSE 'Experto' -- Added a category for those with 15+ years
+    END AS nivel,
+    d.department_name
+FROM
+    employees e
+INNER JOIN
+    departments d ON e.department_id = d.department_id
+ORDER BY
+    empleado; 
+
 ```
