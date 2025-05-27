@@ -429,7 +429,7 @@ TO_CHAR(e.hire_date, 'YYYY') AS año_contratación,
 case 
 when MONTHS_BETWEEN(SYSDATE, e.hire_date)/12 < 5 then 'Novato' 
 when MONTHS_BETWEEN(SYSDATE, e.hire_date)/12 < 10 then 'Semi senior' 
-when MONTHS_BETWEEN(SYSDATE, e.hire_date)/12 < 15 then 'Senior' 
+else 'Senior' 
 end as "EXPERIENCIA LABORAL", 
 d.department_name 
 from employees e inner join departments d  
