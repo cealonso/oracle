@@ -441,3 +441,13 @@ order by
     empleado; 
 
 ```
+
+```sql
+SELECT 
+    last_name,
+    department_id,
+    salary,
+    ROW_NUMBER() OVER (PARTITION BY department_id ORDER BY salary DESC) as ranking_salary
+FROM employees
+ORDER BY department_id, ranking_salary;
+```
