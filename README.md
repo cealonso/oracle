@@ -478,3 +478,16 @@ select
 from
     employees
 ```
+
+
+```sql
+select
+    employee_id,
+    department_id,
+    last_name,
+    salary,
+    dense_rank()
+    over(PARTITION BY department_id order by salary asc) posición
+from
+    employees
+```
