@@ -531,3 +531,31 @@ select
 from
     employees;
 ```
+
+```sql
+select employee_id,
+    first_name,
+    last_name,
+    department_id,
+    salary,
+    hire_date,
+    FIRST_VALUE(first_name || ' ' || last_name) 
+        OVER (PARTITION BY department_id 
+              ORDER BY salary DESC) AS "Salario más Alto"
+from employees
+order by department_id, salary DESC;
+```
+
+```sql
+select employee_id,
+    first_name,
+    last_name,
+    department_id,
+    salary,
+    hire_date,
+    LAST_VALUE(first_name || ' ' || last_name) 
+        OVER (PARTITION BY department_id 
+              ORDER BY salary DESC) AS "Salario más Alto"
+from employees
+order by department_id, salary DESC;
+```
