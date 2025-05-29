@@ -466,3 +466,15 @@ SELECT
 FROM departments 
 ORDER BY department_id;
 ```
+
+```sql
+select
+    employee_id,
+    department_id,
+    last_name,
+    salary,
+    rank()
+    over(PARTITION BY department_id order by salary asc) posición
+from
+    employees
+```
