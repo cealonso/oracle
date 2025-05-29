@@ -577,3 +577,20 @@ group by
 order by
     department_id;
 ```
+
+```sql
+create or replace view v_all_trainings as
+SELECT
+    c.course_name,
+    e.first_name,
+    e.last_name,
+    ec.is_finished
+FROM
+         employees e
+    INNER JOIN employees_courses ec ON e.employee_id = ec.employee_id
+    INNER JOIN courses c ON c.course_id = ec.course_id;
+```
+
+```sql
+select * from v_all_trainings order by last_name;
+```
