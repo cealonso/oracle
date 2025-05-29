@@ -519,3 +519,15 @@ select
 from
 employees;
 ```
+
+```sql
+select
+    employee_id,
+    first_name,
+    last_name,
+    hire_date,
+    department_id,
+    lead(first_name || ' ' || last_name) OVER (PARTITION BY department_id ORDER BY hire_date) AS "Siguiente Contratado"
+from
+    employees;
+```
