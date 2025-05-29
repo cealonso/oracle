@@ -451,3 +451,18 @@ SELECT
 FROM employees
 ORDER BY department_id, ranking_salary;
 ```
+
+## Clase 29/05
+
+```sql
+SELECT 
+    department_id,
+    department_name,
+    manager_id,
+    CASE 
+        WHEN manager_id IS NULL THEN 'Sin Manager'
+        ELSE 'Con Manager'
+    END AS estado_manager
+FROM departments 
+ORDER BY department_id;
+```
