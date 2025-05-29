@@ -559,3 +559,21 @@ select employee_id,
 from employees
 order by department_id, salary DESC;
 ```
+
+```sql
+select
+    department_id,
+    LISTAGG(first_name
+            || ' '
+            || last_name, ', ') WITHIN GROUP
+   (
+    ORDER BY
+        hire_date
+    ) employees
+from
+    employees
+group by
+    department_id
+order by
+    department_id;
+```
