@@ -502,6 +502,5 @@ select
     SUM(salary) OVER (PARTITION BY department_id) AS "Total de salario del  departamento",
     ROUND(salary / SUM(salary) OVER (PARTITION BY department_id) * 100, 2) AS  "Porcentaje de participación en el presupuesto departamental"
 from employees
-where department_id
 order by department_id, salary desc;
 ```
