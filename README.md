@@ -504,3 +504,18 @@ select
 from employees
 order by department_id, salary desc;
 ```
+
+```sql
+select
+    employee_id,
+    first_name,
+    department_id,
+    hire_date,
+    LAG(hire_date)
+    OVER(PARTITION BY department_id
+         ORDER BY
+             hire_date
+    ) AS prev_hiredate
+from
+employees;
+```
