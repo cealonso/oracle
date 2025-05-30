@@ -609,3 +609,7 @@ on d.location_id = l.location_id order by e.employee_id;
 ```sql
 select * from v_employee_details where (department_name='IT')
 ```
+
+```sql
+drop view v_all_trainings;
+```
