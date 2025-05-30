@@ -594,3 +594,14 @@ FROM
 ```sql
 select * from v_all_trainings order by last_name;
 ```
+
+```sql
+create or replace view v_employee_details as
+select e.employee_id, e.first_name || ' ' || e.last_name AS full_name, e.hire_date, TRUNC(MONTHS_BETWEEN(SYSDATE, e.hire_date) / 12) as years_of_service, 
+d.department_name, j.job_title, e.salary, m.first_name || ' ' || m.last_name as manager_name, l.city || ', ' || l.country_id as work_location 
+from employees e inner join departments d 
+on e.department_id = d.department_id inner join jobs j 
+on e.job_id = j.job_id inner join employees m 
+on e.manager_id = m.employee_id inner join locations l 
+on d.location_id = l.location_id order by e.employee_id;
+```
