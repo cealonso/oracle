@@ -652,4 +652,6 @@ salary : salary
 select * from department_dv
 ```
 
-
+```sql
+select * from department_dv where json_value(data,'$.departmentName')='IT'
+```
