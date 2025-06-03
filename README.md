@@ -617,7 +617,7 @@ drop view v_all_trainings;
 
 ```sql
 CREATE VIEW empleados_multiples_trabajos AS
-SELECT DISTINCT 
+SELECT  
     e.employee_id AS id_empleado,
     e.first_name AS nombre,
     e.last_name AS apellido,
