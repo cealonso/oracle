@@ -613,3 +613,17 @@ select * from v_employee_details where (department_name='IT')
 ```sql
 drop view v_all_trainings;
 ```
+## Clase 03/06
+
+```sql
+CREATE VIEW empleados_multiples_trabajos AS
+SELECT DISTINCT 
+    e.employee_id AS id_empleado,
+    e.first_name AS nombre,
+    e.last_name AS apellido,
+    count(*) AS num_jobs
+FROM employees e
+INNER JOIN job_history jh ON e.employee_id = jh.employee_id
+GROUP BY e.employee_id, e.first_name, e.last_name
+HAVING num_jobs > 1;
+```
