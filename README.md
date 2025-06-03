@@ -631,3 +631,25 @@ Pruebo la vista:
 
 select * from empleados_multiples_trabajos;
 ```
+
+```sql
+create or replace json relational duality view department_dv as
+departments @insert @update @delete{
+_id : department_id,
+departmentName : department_name,
+location : location_id,
+employees : employees @insert @update @delete{
+employeeNumber : employee_id,
+employeeFirst : first_name,
+employeeLast : last_name,
+employeeEmail: email,
+employeeDate: hire_date,
+job : job_id,
+salary : salary
+}
+}
+
+select * from department_dv
+```
+
+
