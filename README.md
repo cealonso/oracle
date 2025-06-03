@@ -626,4 +626,8 @@ FROM employees e
 INNER JOIN job_history jh ON e.employee_id = jh.employee_id
 GROUP BY e.employee_id, e.first_name, e.last_name
 HAVING num_jobs > 1;
+
+Pruebo la vista:
+
+select * from empleados_multiples_trabajos;
 ```
