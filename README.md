@@ -707,3 +707,15 @@ BEGIN
    dbms_output.put_line('El apellido es ' || v_name || ' el salario es : ' || v_salary || ' y su salario total es : ' || v_total_salary);
 END;
 ```
+
+
+```sql
+DECLARE
+   v_name employees.last_name%type;
+   v_salary employees.salary%type;
+   v_total_salary employees.salary%type;
+BEGIN
+   select last_name,salary,salary*12 into v_name,v_salary,v_total_salary from employees where employee_id=100;
+   dbms_output.put_line('El apellido es ' || v_name || ' el salario es : ' || v_salary || ' y su salario total es : ' || v_total_salary);
+END;
+```
