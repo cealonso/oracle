@@ -695,3 +695,15 @@ BEGIN
 END;
 
 ```
+
+
+```sql
+DECLARE
+   v_name varchar2(25);
+   v_salary number(8,2);
+   v_total_salary number(8,2);
+BEGIN
+   select last_name,salary,salary*12 into v_name,v_salary,v_total_salary from employees where employee_id=100;
+   dbms_output.put_line('El apellido es ' || v_name || ' el salario es : ' || v_salary || ' y su salario total es : ' || v_total_salary);
+END;
+```
