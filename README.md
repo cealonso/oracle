@@ -655,3 +655,43 @@ select * from department_dv
 ```sql
 select * from department_dv where json_value(data,'$.departmentName')='IT'
 ```
+
+## Clase 05/06
+
+```sql
+BEGIN
+    dbms_output.put_line('Hola mundo');
+END;
+
+```
+
+```sql
+DECLARE
+    v_text VARCHAR2(50) := 'Estoy aprendiendo SQL';
+BEGIN
+    dbms_output.put_line(v_text);
+END;
+```
+
+
+```sql
+DECLARE
+  c_text CONSTANT VARCHAR2(50):='Estoy aprendiendo SQL';
+  v_new_text VARCHAR2(100);
+BEGIN
+  v_new_text := c_text || ' y tambien PL/SQL ';
+  dbms_output.put_line(v_new_text);
+END;
+
+```
+
+```sql
+ 
+DECLARE
+   v_name varchar2(25);
+BEGIN
+   select last_name into v_name from employees where employee_id=100;
+   dbms_output.put_line('El apellido es : ' || v_name);
+END;
+
+```
