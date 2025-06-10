@@ -752,3 +752,47 @@ BEGIN
    DBMS_OUTPUT.PUT_LINE('Promociona: ' || v_eligible_promotion);
 END;
 ```
+
+```sql
+ 
+
+CREATE or REPLACE PROCEDURE get_eligible_promotion(p_employee_id IN NUMBER,p_eligible_promotion OUT CHAR) IS
+/**
+Determina si un empleado es apto para promocionar en un puesto laboral.
+
+@param  p_employee_id  Numero del legajo del empleado a validar
+@return p_eligible_promotion Un char por SI o por NO.
+
+*/
+v_salary        employees.salary%TYPE;
+v_hire_date     employees.hire_date%TYPE;
+v_years_worked  NUMBER;
+BEGIN
+    -- Obtener datos del empleado
+    SELECT salary, hire_date
+    INTO v_salary, v_hire_date
+    FROM employees
+    WHERE employee_id = p_employee_id;
+    
+    -- Calcular años trabajados
+    v_years_worked := TRUNC(MONTHS_BETWEEN(SYSDATE, v_hire_date) / 12);
+    
+     -- Evaluar elegibilidad para promoción usando múltiples condiciones IF
+    IF v_years_worked >= 5 THEN
+        p_eligible_promotion := 'SI';
+    ELSE
+        p_eligible_promotion := 'NO';
+    END IF;
+END get_eligible_promotion;
+
+Ejecutar el procedimiento desde SQL Developer:
+
+DECLARE
+  v_output_message CHAR(2);
+BEGIN
+  get_eligible_promotion(120,v_output_message);
+  DBMS_OUTPUT.PUT_LINE(v_output_message);
+END;
+
+```
+
