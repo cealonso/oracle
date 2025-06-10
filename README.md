@@ -798,3 +798,41 @@ END;
 
 ```
 
+```sql
+create or replace function get_eligible_candidate(p_employee_id IN NUMBER) return char is
+/**
+
+Dado un legajo de un empleado determina si promociona o no de puesto laboral.
+
+@param p_employee_id es un legajo de empleado
+@return Un char indicado SI o NO
+
+
+
+*/
+v_salary        employees.salary%TYPE;
+v_hire_date     employees.hire_date%TYPE;
+v_years_worked  NUMBER;
+v_eligible_promotion char(2);
+begin
+ -- Obtener datos del empleado
+SELECT salary, hire_date
+INTO v_salary, v_hire_date
+FROM employees
+WHERE employee_id = p_employee_id;
+
+-- Calcular años trabajados
+v_years_worked := TRUNC(MONTHS_BETWEEN(SYSDATE, v_hire_date) / 12);
+
+-- Evaluar elegibilidad para promoción usando múltiples condiciones IF
+IF v_years_worked >= 5 THEN
+   v_eligible_promotion := 'SI';
+ELSE
+   v_eligible_promotion := 'NO';
+END IF;
+
+return v_eligible_promotion;
+
+end;
+
+```
