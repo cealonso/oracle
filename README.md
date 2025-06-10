@@ -719,3 +719,36 @@ BEGIN
    dbms_output.put_line('El apellido es ' || v_name || ' el salario es : ' || v_salary || ' y su salario total es : ' || v_total_salary);
 END;
 ```
+## Clase 10/06
+
+```sql
+DECLARE 
+    v_salary        employees.salary%TYPE;
+    v_hire_date     employees.hire_date%TYPE;
+    v_years_worked  NUMBER;
+    v_eligible_promotion char(2);
+    c_employee_id CONSTANT NUMBER := 115;
+BEGIN
+
+    -- Obtener datos del empleado
+    SELECT salary, hire_date
+    INTO v_salary, v_hire_date
+    FROM employees
+    WHERE employee_id = c_employee_id;
+    
+    -- Calcular años trabajados
+    v_years_worked := TRUNC(MONTHS_BETWEEN(SYSDATE, v_hire_date) / 12);
+    
+    -- Evaluar elegibilidad para promoción usando múltiples condiciones IF
+    IF v_years_worked >= 5 THEN
+        v_eligible_promotion := 'SI';
+    ELSE
+        v_eligible_promotion := 'NO';
+    END IF;
+    
+   DBMS_OUTPUT.PUT_LINE('=== EVALUACIÓN DE RENDIMIENTO ===');
+   DBMS_OUTPUT.PUT_LINE('Empleado ID: ' || c_employee_id);
+   DBMS_OUTPUT.PUT_LINE('Años trabajados: ' || v_years_worked);
+   DBMS_OUTPUT.PUT_LINE('Promociona: ' || v_eligible_promotion);
+END;
+```
