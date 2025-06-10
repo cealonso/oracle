@@ -784,9 +784,11 @@ BEGIN
         p_eligible_promotion := 'NO';
     END IF;
 END get_eligible_promotion;
+```
 
 Ejecutar el procedimiento desde SQL Developer:
 
+```sql
 DECLARE
   v_output_message CHAR(2);
 BEGIN
