@@ -836,3 +836,16 @@ return v_eligible_promotion;
 end;
 
 ```
+
+```sql
+
+Version: Oracle 23 o Anterior
+select get_eligible_candidate(101) from dual;
+```
+
+
+```sql
+
+Version: Unicamente Oracle 23 
+select get_eligible_candidate(101);
+```
