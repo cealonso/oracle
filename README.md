@@ -967,3 +967,20 @@ BEGIN
 END;
 ```
 
+```sql
+
+Version 4: Version sin loop y for
+DECLARE
+    v_current_date VARCHAR(10);
+    v_list         VARCHAR(255);
+BEGIN
+
+SELECT to_char(sysdate, 'DD-MM-YYYY') INTO v_current_date;
+dbms_output.put_line('Informe del dia: ' || v_current_date);
+
+select listagg(salary,',') WITHIN GROUP(order by employee_id) into v_list from employees where employee_id in (100,101,102,103,104,105);
+
+dbms_output.put_line(v_list);
+
+END;
+```
