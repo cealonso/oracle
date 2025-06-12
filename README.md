@@ -849,3 +849,36 @@ select get_eligible_candidate(101) from dual;
 Version: Unicamente Oracle 23 
 select get_eligible_candidate(101);
 ```
+
+## Clase 12/06
+
+```sql
+CREATE OR REPLACE PROCEDURE get_hired_employees (
+    p_start_year IN NUMBER,
+    p_end_year   IN NUMBER
+) IS
+    v_count NUMBER;
+BEGIN
+    IF p_start_year < p_end_year THEN
+        SELECT
+            COUNT(*)
+        INTO v_count
+        FROM
+            employees
+        WHERE
+               EXTRACT(YEAR FROM hire_date) BETWEEN p_start_year AND  p_end_year;
+        dbms_output.put_line(v_count);
+        ELSE
+        dbms_output.put_line('El primer año debe ser menor que el segundo año');
+    END IF;
+END;
+```
+
+```sql
+Test en SQL Developer:
+
+BEGIN
+ get_hired_employees(2024,2025);
+END;
+
+```
