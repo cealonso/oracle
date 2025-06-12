@@ -924,8 +924,8 @@ for i in 100..105 loop
         FROM
             employees
         WHERE
-            employee_id = i; 
-				DBMS_OUTPUT.PUT_LINE(v_salary);
+            employee_id = i;
+        DBMS_OUTPUT.PUT_LINE(v_salary);
         DBMS_OUTPUT.PUT_LINE(i);
 end loop;
 end;
