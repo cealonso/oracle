@@ -945,7 +945,7 @@ BEGIN
     INTO v_current_date;
 
     dbms_output.put_line('Informe del dia: ' || v_current_date);
-    FOR i IN 110..115 LOOP
+    FOR i IN 100..105 LOOP
         SELECT
             salary
         INTO v_salary
