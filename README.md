@@ -884,6 +884,8 @@ END;
 ```
 
 ```sql
+Version 1: Uso de Loop
+
 DECLARE
 v_salary employees.salary%TYPE;
 v_employee_id NUMBER := 110;
@@ -903,6 +905,28 @@ END LOOP;
    DBMS_OUTPUT.PUT_LINE('== Fin ==');
     
 END;
+```
 
+```sql
+Version 2: Uso de for loop
 
+declare
+v_salary  employees.salary%TYPE;
+v_current_date VARCHAR(10);
+v_list VARCHAR(255);
+begin
+select to_char(sysdate, 'YYYY-mm-dd') into v_current_date;
+dbms_output.put_line('La fecha de hoy es: ' || v_current_date);
+for i in 100..105 loop
+        SELECT
+            salary
+        INTO v_salary
+        FROM
+            employees
+        WHERE
+            employee_id = i; 
+				DBMS_OUTPUT.PUT_LINE(v_salary);
+        DBMS_OUTPUT.PUT_LINE(i);
+end loop;
+end;
 ```
