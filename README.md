@@ -930,3 +930,40 @@ for i in 100..105 loop
 end loop;
 end;
 ```
+
+```sql
+
+Version 3: Mejorada
+
+DECLARE
+    v_salary       employees.salary%TYPE;
+    v_current_date VARCHAR(10);
+    v_list VARCHAR(255);
+BEGIN
+    SELECT
+        to_char(sysdate, 'DD-MM-YYYY')
+    INTO v_current_date;
+
+    dbms_output.put_line('Informe del dia: ' || v_current_date);
+    FOR i IN 110..115 LOOP
+        SELECT
+            salary
+        INTO v_salary
+        FROM
+            employees
+        WHERE
+            employee_id = i;
+
+        v_list := v_list
+                  || to_char(v_salary)
+                  || ',';
+    END LOOP;
+     -- Remove the trailing comma
+    IF v_list IS NOT NULL THEN
+        v_list := rtrim(v_list, ',');
+    END IF;
+
+    dbms_output.put_line(v_list);
+END;
+```
+
