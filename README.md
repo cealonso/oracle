@@ -882,3 +882,27 @@ BEGIN
 END;
 
 ```
+
+```sql
+DECLARE
+v_salary employees.salary%TYPE;
+v_employee_id NUMBER := 110;
+BEGIN
+LOOP
+    SELECT salary
+    INTO v_salary
+    FROM employees
+    WHERE employee_id = v_employee_id;
+    DBMS_OUTPUT.PUT_LINE('id: ' || v_employee_id);
+    DBMS_OUTPUT.PUT_LINE('salary: ' || v_salary);
+    v_employee_id := v_employee_id + 1;
+    IF v_employee_id > 115 THEN
+         EXIT;
+      END IF;
+   END LOOP;
+   DBMS_OUTPUT.PUT_LINE('== Fin ==');
+    
+END;
+
+
+```
