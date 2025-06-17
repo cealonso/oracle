@@ -1067,3 +1067,34 @@ END;
 exec statistics_dept_2('IT');
 
 ```
+
+```sql
+create or replace procedure employee_data(
+p_emp_id IN employees.employee_id%type)
+IS
+v_out VARCHAR2(100);
+ex_invalid_id EXCEPTION;
+
+BEGIN
+
+if(p_emp_id <= 0) THEN
+RAISE ex_invalid_id; 
+ELSE
+select e.first_name || ' ' || e.last_name into v_out from employees e where p_emp_id = e.employee_id;
+dbms_output.put_line(v_out);
+end if;
+
+EXCEPTION
+when ex_invalid_id then
+dbms_output.put_line('el ID debe ser mayor a cero');
+when no_data_found then
+dbms_output.put_line('No se encontro el ID ingresado ' || p_emp_id);
+when others then
+dbms_output.put_line('Revisa bien los datos ingresados ');
+
+
+END;
+
+exec employee_data(100);
+
+```
