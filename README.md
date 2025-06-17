@@ -1025,6 +1025,8 @@ begin
 statistics_dept('ITA');
 end;
 
+ó
 
+exec statistics_dept('IT');
 ```
 
