@@ -1028,5 +1028,8 @@ end;
 ó
 
 exec statistics_dept('IT');
+
+ó
+execute statistics_dept('IT');
 ```
 
