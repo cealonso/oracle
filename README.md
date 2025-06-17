@@ -984,3 +984,47 @@ dbms_output.put_line(v_list);
 
 END;
 ```
+
+## Clase 17/06
+
+```sql
+create or replace procedure statistics_dept (p_dept_name IN departments.department_name%TYPE) is
+r_dept departments%ROWTYPE;
+v_count_total NUMBER;
+v_salary_total NUMBER;
+v_salary_max NUMBER;
+v_salary_min NUMBER;
+BEGIN
+SELECT d.department_name,d.department_id, count(*) as cantidad, sum(e.salary) as total, min(e.salary) as minimo, max(e.salary) as maximo into
+r_dept.department_name, r_dept.department_id,v_count_total,v_salary_total,v_salary_min,v_salary_max
+FROM employees e INNER JOIN departments d ON e.department_id=d.department_id where UPPER(p_dept_name)=UPPER(d.department_name) group by d.department_name, d.department_id;
+-- Mostrar las estadisticas
+DBMS_OUTPUT.PUT_LINE('');
+DBMS_OUTPUT.PUT_LINE('=== ESTADÍSTICAS DEL DEPARTAMENTO ===');
+DBMS_OUTPUT.PUT_LINE('Nombre de Departamento: ' ||p_dept_name);
+DBMS_OUTPUT.PUT_LINE('ID de Departamento: ' || r_dept.department_id);
+DBMS_OUTPUT.PUT_LINE('Total de empleados: ' || v_count_total);
+DBMS_OUTPUT.PUT_LINE('SALARIO TOTAL: ' || TO_CHAR(v_salary_total, '999,999,999.99'));
+DBMS_OUTPUT.PUT_LINE('SALARIO MINIMO: ' || TO_CHAR(v_salary_min, '999,999,999.99'));
+DBMS_OUTPUT.PUT_LINE('SALARIO MAXIMO: ' || TO_CHAR(v_salary_max, '999,999,999.99'));
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+DBMS_OUTPUT.PUT_LINE('Departamento no encontrado: ' || p_dept_name);
+WHEN OTHERS THEN
+DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+END;
+
+Ejecución:
+
+begin
+statistics_dept('IT');
+end;
+ó
+
+begin
+statistics_dept('ITA');
+end;
+
+
+```
+
