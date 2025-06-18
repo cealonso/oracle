@@ -1098,3 +1098,16 @@ END;
 exec employee_data(100);
 
 ```
+
+```sql
+DECLARE
+  v_last_name VARCHAR2(50);
+BEGIN
+
+FOR r_employee IN (SELECT last_name,hire_date FROM employees)
+LOOP
+dbms_output.put_line(r_employee.last_name || ' hire date: ' || r_employee.hire_date);
+END LOOP;
+
+END;
+```
