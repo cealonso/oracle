@@ -1180,7 +1180,7 @@ END;
 ```
 
 
-
+```sql
 create or replace procedure employes_department(departmen_num in employees.department_id%TYPE) IS 
   v_last_name employees.last_name%type;
   CURSOR c_employee IS
@@ -1202,3 +1202,4 @@ BEGIN
             CLOSE c_employee;
         END IF;
 END;
+```
