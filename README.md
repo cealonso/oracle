@@ -1178,3 +1178,27 @@ BEGIN
  CLOSE c_employee;
 END;
 ```
+
+
+
+create or replace procedure employes_department(departmen_num in employees.department_id%TYPE) IS 
+  v_last_name employees.last_name%type;
+  CURSOR c_employee IS
+  SELECT last_name FROM employees where department_id= departmen_num;
+  
+BEGIN
+--Cursor Explicito.
+ OPEN c_employee;
+ LOOP
+ FETCH c_employee INTO v_last_name;
+ EXIT WHEN c_employee%NOTFOUND;
+ DBMS_OUTPUT.PUT_LINE('El apellido del empleado es : ' || v_last_name);
+ END LOOP;
+ DBMS_OUTPUT.PUT_LINE('Cantidad de Filas: ' || c_employee%rowcount);
+ CLOSE c_employee;
+ EXCEPTION
+    WHEN OTHERS THEN
+        IF c_employee%isopen THEN
+            CLOSE c_employee;
+        END IF;
+END;
