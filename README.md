@@ -1129,3 +1129,16 @@ END LOOP;
 
 END;
 ```
+
+```sql
+DECLARE
+  v_last_name VARCHAR2(50);
+  CURSOR c_employee IS
+  SELECT last_name FROM employees;
+BEGIN
+  OPEN c_employee;
+  FETCH c_employee INTO v_last_name;
+  DBMS_OUTPUT.PUT_LINE('El apellido del empleado es : ' || v_last_name);
+  CLOSE c_employee;
+END;
+```
