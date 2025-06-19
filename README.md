@@ -1111,3 +1111,21 @@ END LOOP;
 
 END;
 ```
+
+## Clase 19/06
+
+```sql
+DECLARE
+CURSOR c_employees
+   IS
+      SELECT last_name FROM employees;
+v_last_name VARCHAR2(50);
+BEGIN
+
+FOR r_employee IN c_employees
+LOOP
+dbms_output.put_line(r_employee.last_name);
+END LOOP;
+
+END;
+```
