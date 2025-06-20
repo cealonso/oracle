@@ -1223,7 +1223,7 @@ CREATE OR REPLACE PROCEDURE employees_average_salary (p_depto_name departments.d
         FROM employees e
         INNER JOIN departments d ON e.department_id = d.department_id
         INNER JOIN jobs j ON e.job_id = j.job_id
-        WHERE d.department_name=p_depto_name and e.salary > (SELECT AVG(salary) FROM employees)
+        WHERE UPPER(d.department_name)=UPPER(p_depto_name) and e.salary > (SELECT AVG(salary) FROM employees)
         ORDER BY e.salary DESC;
         
     v_employee_id employees.employee_id%TYPE;
