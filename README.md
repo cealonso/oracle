@@ -1208,3 +1208,70 @@ BEGIN
 employes_department (50); 
 END;
 ```
+
+```sql
+CREATE OR REPLACE PROCEDURE employees_average_salary (p_depto_name departments.department_name%type) IS
+-- Mostrar los empleados de un departamento pasado por parametro cuyo salario sea mayor al promedio.
+ CURSOR c_employees IS
+        SELECT e.employee_id,
+               e.first_name,
+               e.last_name,
+               e.email,
+               e.salary,
+               d.department_name,
+               j.job_title
+        FROM employees e
+        INNER JOIN departments d ON e.department_id = d.department_id
+        INNER JOIN jobs j ON e.job_id = j.job_id
+        WHERE d.department_name=p_depto_name and e.salary > (SELECT AVG(salary) FROM employees)
+        ORDER BY e.salary DESC;
+        
+    v_employee_id employees.employee_id%TYPE;
+    v_first_name employees.first_name%TYPE;
+    v_last_name employees.last_name%TYPE;
+    v_email employees.email%TYPE;
+    v_salary employees.salary%TYPE;
+    v_department_name departments.department_name%TYPE;
+    v_job_title jobs.job_title%TYPE;
+
+    v_contador NUMBER := 0;
+    v_salary_avg NUMBER;
+    
+BEGIN
+  
+   --Guardo en v_salary_avg el promedio salarial de los empleados de la empresa
+   select avg(salary) into v_salary_avg from employees;
+    
+    DBMS_OUTPUT.PUT_LINE('=== EMPLEADOS CON SALARIO SUPERIOR AL PROMEDIO ===');
+    DBMS_OUTPUT.PUT_LINE('Salario promedio: $' || ROUND(v_salary_avg, 2));
+    DBMS_OUTPUT.PUT_LINE('================================================');
+    DBMS_OUTPUT.PUT_LINE('');
+    
+    OPEN c_employees;
+    LOOP
+    FETCH c_employees INTO v_employee_id, v_first_name,v_last_name, v_email,v_salary,v_department_name,v_job_title;
+    EXIT WHEN c_employees%NOTFOUND;
+    v_contador:=v_contador+1;
+    DBMS_OUTPUT.PUT_LINE('Empleado #' || v_contador);
+    DBMS_OUTPUT.PUT_LINE('ID: ' || v_employee_id);
+    DBMS_OUTPUT.PUT_LINE('Nombre: ' || v_first_name || ' ' || v_last_name);
+    DBMS_OUTPUT.PUT_LINE('Email: ' || v_email);
+    DBMS_OUTPUT.PUT_LINE('Salario: $' || v_salary);
+    DBMS_OUTPUT.PUT_LINE('Departamento: ' || v_department_name);
+    DBMS_OUTPUT.PUT_LINE('Puesto: ' || v_job_title);
+    DBMS_OUTPUT.PUT_LINE('Diferencia con promedio: $' || ROUND(v_salary - v_salary_avg, 2));
+    DBMS_OUTPUT.PUT_LINE('----------------------------------------');
+    END LOOP;
+    CLOSE c_employees;
+    DBMS_OUTPUT.PUT_LINE('');
+    DBMS_OUTPUT.PUT_LINE('Total de empleados con salario superior al promedio: ' || v_contador);
+    EXCEPTION
+    WHEN OTHERS THEN
+        -- Cerrar el cursor en caso de error
+        IF c_employees%ISOPEN THEN
+            CLOSE c_employees;
+        END IF;
+        DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+
+END;
+```
