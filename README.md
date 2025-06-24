@@ -1210,6 +1210,11 @@ END;
 ```
 
 ```sql
+
+-- Hacer un procedimiento denominado list_employees_department que dado un nombre de un departamento, despliega el nombre completo, cargo y salario 
+-- de todos sus empleados ordenados por salario en forma ascendente.Si el departamento no existe o no tiene empleados cancelar (Usar Cursores Explicitos)
+
+
 CREATE OR REPLACE PROCEDURE employees_average_salary (p_depto_name departments.department_name%type) IS
 -- Mostrar los empleados de un departamento pasado por parametro cuyo salario sea mayor al promedio.
  CURSOR c_employees IS
@@ -1275,3 +1280,77 @@ BEGIN
 
 END;
 ```
+
+## Clase 24/06
+
+```sql
+
+CREATE OR REPLACE PROCEDURE list_employees_department (p_depto_name departments.department_name%type) IS
+-- Mostrar los empleados de un departamento pasado por parametro cuyo salario sea mayor al promedio.
+ CURSOR c_employees IS
+        SELECT e.first_name || ' , ' || e.last_name,
+               e.salary,
+               j.job_title
+        FROM employees e
+        INNER JOIN departments d ON e.department_id = d.department_id
+        INNER JOIN jobs j ON e.job_id = j.job_id
+        WHERE UPPER(d.department_name)=UPPER(p_depto_name)
+        ORDER BY e.salary asc;
+        
+
+    v_full_name VARCHAR2(50);
+    v_salary employees.salary%TYPE;
+    v_job_title jobs.job_title%TYPE;
+    v_count NUMBER;
+    v_emp_count NUMBER;
+    ex_invalid_depto EXCEPTION;
+    ex_no_employees EXCEPTION;
+    
+BEGIN
+    
+    -- Verificar si el departamento existe
+    SELECT count(*) into v_count FROM departments WHERE UPPER(department_name)=UPPER(p_depto_name);
+    IF(v_count = 0) THEN
+    RAISE ex_invalid_depto; 
+    END IF;
+    -- Verificar si el departamento tiene empleados
+    SELECT count(*) INTO v_emp_count FROM employees e INNER JOIN departments d ON e.department_id = d.department_id
+    WHERE UPPER(d.department_name)=UPPER(p_depto_name);
+    IF(v_emp_count = 0) THEN
+    RAISE ex_no_employees;
+    END IF;
+    
+    
+    OPEN c_employees;
+    LOOP
+    FETCH c_employees INTO v_full_name,v_salary,v_job_title;
+    EXIT WHEN c_employees%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE('Nombre: ' || v_full_name);
+    DBMS_OUTPUT.PUT_LINE('Salario: $' || v_salary);
+    DBMS_OUTPUT.PUT_LINE('Puesto: ' || v_job_title);
+    DBMS_OUTPUT.PUT_LINE('----------------------------------------');
+    END LOOP;
+    
+    CLOSE c_employees;
+    EXCEPTION
+    WHEN ex_invalid_depto THEN
+       DBMS_OUTPUT.PUT_LINE('EL Departamento no existe');
+    WHEN ex_no_employees THEN
+       DBMS_OUTPUT.PUT_LINE('ERROR: El departamento "' || p_depto_name || '" no tiene empleados asignados.');   
+    WHEN OTHERS THEN
+        -- Cerrar el cursor en caso de error
+        IF c_employees%ISOPEN THEN
+            CLOSE c_employees;
+        END IF;
+        DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
+END;
+
+-- Test
+
+BEGIN
+ list_employees_department('Shipping');
+END;
+
+```
+
+
