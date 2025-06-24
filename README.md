@@ -1285,8 +1285,9 @@ END;
 
 ```sql
 
+
+
 CREATE OR REPLACE PROCEDURE list_employees_department (p_depto_name departments.department_name%type) IS
--- Mostrar los empleados de un departamento pasado por parametro cuyo salario sea mayor al promedio.
  CURSOR c_employees IS
         SELECT e.first_name || ' , ' || e.last_name,
                e.salary,
