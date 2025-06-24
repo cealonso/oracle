@@ -1355,4 +1355,78 @@ END;
 
 ```
 
+```sql
 
+-- Hacer un procedimiento denominado list_employees_department_2 que dado un nombre de un departamento, despliega el nombre completo, cargo y salario 
+-- de todos sus empleados ordenados por salario en forma ascendente.Para esto cargar en una tabla en memoria los empleados ordenados por el salario.
+-- Si el departamento no existe o no tiene empleados cancelar.Cargar la tabla con Bulk Collect
+
+CREATE OR REPLACE PROCEDURE list_employees_department_2 (p_depto_name departments.department_name%type) IS
+-- Definir el tipo de registro para los empleados
+TYPE t_employee_record IS RECORD (
+        full_name VARCHAR2(100),
+        job_title jobs.job_title%TYPE,
+        salary employees.salary%TYPE
+);
+
+-- Definir la tabla en memoria (array asociativo)
+TYPE t_employees_table IS TABLE OF t_employee_record;
+
+-- Declarar la variable de la tabla
+v_employees_table t_employees_table;
+
+ex_no_employees EXCEPTION;
+ex_invalid_depto EXCEPTION;
+v_count NUMBER;
+v_emp_count NUMBER;
+
+BEGIN
+
+-- Verificar si el departamento existe
+SELECT count(*) into v_count FROM departments WHERE UPPER(department_name)=UPPER(p_depto_name);
+IF(v_count = 0) THEN
+RAISE ex_invalid_depto; 
+END IF;
+-- Verificar si el departamento tiene empleados
+SELECT count(*) INTO v_emp_count FROM employees e INNER JOIN departments d ON e.department_id = d.department_id
+WHERE UPPER(d.department_name)=UPPER(p_depto_name);
+IF(v_emp_count = 0) THEN
+RAISE ex_no_employees;
+END IF;
+-- Cargar la tabla con Bulk Collect
+ SELECT e.first_name || ', ' || e.last_name,
+               j.job_title,
+               e.salary
+              
+  BULK COLLECT INTO v_employees_table
+  FROM employees e
+  INNER JOIN departments d ON e.department_id = d.department_id
+  INNER JOIN jobs j ON e.job_id = j.job_id
+  WHERE UPPER(d.department_name)=UPPER(p_depto_name)
+  ORDER BY e.salary asc;
+  
+   -- Recorrer la tabla en memoria y mostrar los resultados
+    FOR i IN 1..v_employees_table.COUNT LOOP
+        DBMS_OUTPUT.PUT_LINE('Nombre Completo: ' || v_employees_table(i).full_name);
+        DBMS_OUTPUT.PUT_LINE('Cargo: ' || v_employees_table(i).job_title);
+        DBMS_OUTPUT.PUT_LINE('Salario: $' || TO_CHAR(v_employees_table(i).salary, '999,999.99'));
+        DBMS_OUTPUT.PUT_LINE('--------------------------------------------');
+    END LOOP;
+
+EXCEPTION
+   WHEN ex_invalid_depto THEN
+    DBMS_OUTPUT.PUT_LINE('EL Departamento no existe');
+    WHEN ex_no_employees THEN
+        DBMS_OUTPUT.PUT_LINE('ERROR: El departamento "' || p_depto_name || '" no tiene empleados asignados.');
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('ERROR INESPERADO: ' || SQLERRM);
+
+END;
+
+--Test
+
+BEGIN
+ list_employees_department_2('Shipping');
+END;
+
+```
