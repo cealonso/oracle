@@ -1285,6 +1285,10 @@ END;
 
 ```sql
 
+-- Hacer un procedimiento denominado list_employees_department que dado un nombre de un departamento, despliega el nombre completo, cargo y salario 
+-- de todos sus empleados ordenados por salario en forma ascendente.Si el departamento no existe o no tiene empleados cancelar (Usar Cursores Explicitos)
+
+
 
 
 CREATE OR REPLACE PROCEDURE list_employees_department (p_depto_name departments.department_name%type) IS
