@@ -1432,7 +1432,9 @@ END;
 ```
 
 ```sql
---Crear una función denominada  search_employees_department que solicite el id del empleado y el nombre del departamento,
---verifique si el empleado trabaja actualmente en dicho departamento (Boolean)
+--Crear una función denominada search_employees_department que solicite el id del empleado y el nombre del departamento,
+--verifique si el empleado trabaja actualmente en dicho departamento (Boolean).
+
+
 
 ```
