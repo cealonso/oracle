@@ -1436,5 +1436,29 @@ END;
 --verifique si el empleado trabaja actualmente en dicho departamento (Boolean).
 
 
+CREATE OR REPLACE FUNCTION search_employees_department (p_id employees.employee_id%type,p_depto_name departments.department_name%type) RETURN BOOLEAN IS
+v_count NUMBER;
+BEGIN
+
+SELECT count(e.employee_id) into v_count FROM EMPLOYEES e INNER JOIN DEPARTMENTS d ON e.department_id=d.department_id WHERE e.employee_id=p_id AND UPPER(d.department_name)=UPPER(p_depto_name);
+
+if (v_count=0) THEN
+return FALSE;
+ELSE
+return TRUE;
+END IF;
+
+END;
+
+-- TEST : Verificar el employee_id 100 que trabaja en executive -->true
+-- Pruebo esta QUERY para ver el si el empleado trabaja en dicho departamento: SELECT e.employee_id,d.department_name  FROM EMPLOYEES e INNER JOIN DEPARTMENTS d ON
+--e.department_id=d.department_id ORDER BY employee_id;
+ 
+ DECLARE
+ v_out BOOLEAN;
+ BEGIN
+  v_out:=search_employees_department(100, 'executive');
+  dbms_output.put_line(TO_CHAR(v_out));
+ END;
 
 ```
