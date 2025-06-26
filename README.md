@@ -1576,4 +1576,8 @@ execute pkg_department.list_employees_department_2('Executive');
 
 ```
 
+```sql
 
+-- Obtener los tres departamentos que poseen el mayor promedio salarial, incluyendo el nombre del departamento y su valor promedio
+
+```
