@@ -1551,10 +1551,26 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('ERROR INESPERADO: ' || SQLERRM);
 
 END;
+END;
 
+-- Probar la función search_employees_department() del package pkg_department
 
+DECLARE
+v_out Boolean;
+BEGIN
+
+v_out:=pkg_department.search_employees_department (100,'Executive'); 
+dbms_output.put_line(TO_CHAR(v_out));
 
 END;
+
+-- Otra forma de testear la misma función
+
+select pkg_department.search_employees_department(100,'Executive') from dual;
+
+-- Ahora llamo al procedimiento list_employees_department_2()
+
+execute pkg_department.list_employees_department_2('Executive');
 
 
 
