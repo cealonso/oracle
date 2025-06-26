@@ -1281,7 +1281,7 @@ BEGIN
 END;
 ```
 
-## Clase 24/06
+## Clase 24/06 y 26/06
 
 ```sql
 
