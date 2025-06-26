@@ -1462,3 +1462,19 @@ END;
  END;
 
 ```
+
+```sql
+
+-- Creación del Paquete pkg_department.
+
+CREATE OR REPLACE PACKAGE pkg_department AS
+FUNCTION search_employees_department (p_id employees.employee_id%type,p_depto_name departments.department_name%type) RETURN BOOLEAN;
+PROCEDURE list_employees_department_2 (p_depto_name departments.department_name%type);
+END;
+
+
+
+
+```
+
+
