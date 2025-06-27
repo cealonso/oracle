@@ -1580,4 +1580,17 @@ execute pkg_department.list_employees_department_2('Executive');
 
 -- Obtener los tres departamentos que poseen el mayor promedio salarial, incluyendo el nombre del departamento y su valor promedio
 
+SELECT
+    d.department_name AS "primeros_3_departamentos",
+    AVG(e.salary)     AS "mayor_promedio_salarial"
+FROM
+         departments d
+    INNER JOIN employees e ON d.department_id = e.department_id
+GROUP BY
+    d.department_name
+ORDER BY
+    AVG(e.salary) DESC
+FETCH FIRST 3 ROW ONLY;
+
+
 ```
