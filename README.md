@@ -1711,6 +1711,29 @@ PROCEDURE department_review_salary (p_department_id IN departments.department_id
 
 END;
 
+-- Test (Recorremos todos los departamentos para visualizar)
+
+DECLARE
+
+CURSOR c_departments IS
+ SELECT DISTINCT department_id
+    FROM departments 
+    WHERE department_id IS NOT NULL
+    ORDER BY department_id;
+BEGIN
+
+ DBMS_OUTPUT.PUT_LINE('=== TESTING COMPLETO DE TODOS LOS DEPARTAMENTOS ===');
+ 
+ FOR dept IN c_departments LOOP --Cursor Implicito
+ 
+    DBMS_OUTPUT.PUT_LINE(CHR(10) || 'Procesando: ' || dept.department_id);
+     pkg_salary.department_review_salary(dept.department_id);
+ 
+ 
+ END LOOP;
+
+END;
+
 ```
 
 
