@@ -1594,3 +1594,123 @@ FETCH FIRST 3 ROW ONLY;
 
 
 ```
+
+## Clase 01/07
+
+```sql
+--Cabecera del Package pkg_salary
+
+CREATE OR REPLACE PACKAGE pkg_salary AS
+TYPE t_employee_analysis IS RECORD (
+    employee_id    employees.employee_id%TYPE,
+    full_name      VARCHAR2(100),
+    job_title      jobs.job_title%TYPE,
+    current_salary employees.salary%TYPE,
+    proposed_salary NUMBER,
+    bonus          NUMBER
+  );
+TYPE t_salary IS TABLE OF t_employee_analysis;
+
+PROCEDURE department_review_salary (p_department_id IN departments.department_id%TYPE);
+END;
+
+--Cuerpo del Package pkg_salary
+
+CREATE OR REPLACE PACKAGE BODY pkg_salary AS
+PROCEDURE department_review_salary (p_department_id IN departments.department_id%TYPE) AS
+    -- El procedimiento department_review_salary analiza todos los empleados de un departamento específico y 
+    -- genera un informe con propuestas de aumento salarial y bonos basados en su puesto de trabajo.
+
+    -- Colección para cargar eficientemente a todos los empleados del departamento
+    TYPE t_employee_table IS TABLE OF employees%ROWTYPE;
+    v_employees t_employee_table;
+
+    -- Varray para almacenar los resultados de nuestro análisis
+    v_review_list t_salary := t_salary(); -- Inicializamos la colección vacía
+
+    v_temp_record t_employee_analysis;
+    v_increase_rate NUMBER;
+    c_it_prog_rate     CONSTANT NUMBER := 0.07;
+    c_fi_account_rate  CONSTANT NUMBER := 0.05;
+    c_default_rate     CONSTANT NUMBER := 0.04;
+    
+     CURSOR c_employees IS
+     SELECT *
+     FROM employees
+     WHERE department_id = p_department_id
+     AND employees.salary IS NOT NULL;
+
+
+  BEGIN
+  -- Validación de entrada
+    IF p_department_id IS NULL THEN
+      RAISE_APPLICATION_ERROR(-20001, 'El ID del departamento no puede ser nulo');
+    END IF;
+    
+    -- Paso A: Usar BULK COLLECT para una carga masiva y eficiente de datos.
+    -- Esto ejecuta UNA sola consulta para traer TODAS las filas necesarias.
+    OPEN c_employees;
+    FETCH c_employees BULK COLLECT INTO v_employees;
+    CLOSE c_employees;
+
+
+    -- Si no se encontraron empleados, salir.
+    IF v_employees.COUNT = 0 THEN
+      DBMS_OUTPUT.PUT_LINE('No se encontraron empleados para el departamento ' || p_department_id);
+      RETURN;
+    END IF;
+
+    -- Paso B: Iterar sobre la colección en memoria para aplicar la lógica de negocio.
+    FOR i IN v_employees.FIRST .. v_employees.LAST LOOP
+      -- Lógica de negocio para determinar aumento y bono
+      CASE v_employees(i).job_id
+        WHEN 'IT_PROG' THEN
+          v_increase_rate := c_it_prog_rate; -- 7% de aumento
+          v_temp_record.bonus := 1500;
+        WHEN 'FI_ACCOUNT' THEN
+          v_increase_rate := c_fi_account_rate; -- 5%
+          v_temp_record.bonus := 750;
+        ELSE
+          v_increase_rate := c_default_rate; -- 4% para el resto
+          v_temp_record.bonus := 500;
+      END CASE;
+
+      -- Poblar nuestro record personalizado con los resultados
+      v_temp_record.employee_id    := v_employees(i).employee_id;
+      v_temp_record.full_name      := v_employees(i).first_name || ' ' || v_employees(i).last_name;
+      v_temp_record.job_title      := v_employees(i).job_id;
+      v_temp_record.current_salary := v_employees(i).salary;
+      v_temp_record.proposed_salary := ROUND(v_employees(i).salary * (1 + v_increase_rate));
+      
+      -- Añadir el record con los resultados a nuestra lista de revisión
+      v_review_list.EXTEND;
+      v_review_list(v_review_list.LAST) := v_temp_record;
+      
+    END LOOP;
+
+    -- Paso C: Generar el informe final desde la colección de resultados.
+    -- Encabezado
+    DBMS_OUTPUT.PUT_LINE('--- Revisión Salarial para Departamento ' || p_department_id || ' ---');
+    DBMS_OUTPUT.PUT_LINE(RPAD('Empleado', 25) || RPAD('Puesto', 15) || RPAD('Salario Actual', 20) || RPAD('Salario Propuesto', 20) || 'Bono por Capacitación');
+    DBMS_OUTPUT.PUT_LINE(RPAD('-', 103, '-'));
+
+    FOR i IN v_review_list.FIRST .. v_review_list.LAST LOOP
+      DBMS_OUTPUT.PUT_LINE(
+        RPAD(v_review_list(i).full_name, 25) ||
+        RPAD(v_review_list(i).job_title, 15) ||
+        RPAD(TO_CHAR(v_review_list(i).current_salary, '$99,999.00'), 20) ||
+        RPAD(TO_CHAR(v_review_list(i).proposed_salary, '$99,999.00'), 20) ||
+        TO_CHAR(v_review_list(i).bonus, '$9,999.00')
+      );
+    END LOOP;
+  EXCEPTION
+    WHEN OTHERS THEN
+      DBMS_OUTPUT.PUT_LINE('Otro Error -> '||SQLERRM);
+  END;
+
+
+END;
+
+```
+
+
