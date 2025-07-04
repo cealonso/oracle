@@ -1736,4 +1736,24 @@ END;
 
 ```
 
+## Clase 03/07
 
+```sql
+SELECT e.employee_id, e.first_name, e.last_name, e.email, e.salary,d.department_name
+FROM employees e INNER JOIN departments d ON e.department_id = d.department_id ORDER BY e.last_name ASC;
+```
+
+```sql
+EXPLAIN PLAN FOR
+SELECT e.employee_id, e.first_name, e.last_name, e.email, e.salary,d.department_name
+FROM employees e INNER JOIN departments d ON e.department_id = d.department_id ORDER BY e.last_name ASC;
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
+```
+
+```sql
+CREATE INDEX idx_emp_covering ON employees(department_id, last_name, employee_id, first_name, email, salary);
+```
+
+```sql
+SELECT index_name, status, visibility, last_analyzed FROM user_indexes WHERE table_name = 'EMPLOYEES';
+```
