@@ -1757,3 +1757,79 @@ CREATE INDEX idx_emp_covering ON employees(department_id, last_name, employee_id
 ```sql
 SELECT index_name, status, visibility, last_analyzed FROM user_indexes WHERE table_name = 'EMPLOYEES';
 ```
+
+
+## Clase 08/07
+
+```sql
+CREATE GLOBAL TEMPORARY TABLE gtt_employees_salary (
+    employee_id    NUMBER,
+    full_name      VARCHAR2(100),
+    current_salary NUMBER,
+    proposed_salary NUMBER
+)ON COMMIT DELETE ROWS;
+
+```
+
+```sql
+SELECT object_type, temporary 
+FROM user_objects 
+WHERE object_name = 'GTT_EMPLOYEES_SALARY';
+```
+
+
+```sql
+INSERT INTO gtt_employees_salary (employee_id, full_name, current_salary,proposed_salary)
+VALUES (101, 'Martin Bach', 8000,8500);
+
+INSERT INTO gtt_employees_salary (employee_id, full_name, current_salary,proposed_salary)
+VALUES (102, 'Anders Donner', 11000,12500);
+```
+
+```sql
+SELECT * FROM gtt_employees_salary;
+```
+
+```sql
+commit;
+```
+
+
+```sql
+SELECT count(*) FROM gtt_employees_salary;
+```
+
+
+```sql
+CREATE GLOBAL TEMPORARY TABLE gtt_employees_salary (
+    employee_id    NUMBER,
+    full_name      VARCHAR2(100),
+    current_salary NUMBER,
+    proposed_salary NUMBER
+)ON COMMIT PRESERVE ROWS;
+
+```
+
+```sql
+INSERT INTO gtt_employees_salary (employee_id, full_name, current_salary,proposed_salary)
+VALUES (101, 'Martin Bach', 8000,8500);
+
+INSERT INTO gtt_employees_salary (employee_id, full_name, current_salary,proposed_salary)
+VALUES (102, 'Anders Donner', 11000,12500);
+```
+
+```sql
+SELECT * FROM gtt_employees_salary_data;
+```
+
+```sql
+commit;
+```
+
+```sql
+SELECT count(*) FROM gtt_employees_salary;
+```
+
+```sql
+SELECT * FROM gtt_employees_salary;
+```
