@@ -1833,3 +1833,15 @@ SELECT count(*) FROM gtt_employees_salary;
 ```sql
 SELECT * FROM gtt_employees_salary;
 ```
+
+```sql
+CREATE GLOBAL TEMPORARY TABLE gtt_high_salary_employees
+ON COMMIT PRESERVE ROWS
+AS SELECT employee_id, first_name, last_name, department_id, salary
+FROM employees 
+WHERE salary > 5000;
+```
+
+```sql
+select * from gtt_high_salary_employees;
+```
