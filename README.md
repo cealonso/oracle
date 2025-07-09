@@ -1845,3 +1845,13 @@ WHERE salary > 5000;
 ```sql
 select * from gtt_high_salary_employees;
 ```
+
+```sql
+WITH cte_salary_total AS (
+    SELECT employee_id, SUM(salary) AS salary_anual
+    FROM employees
+    WHERE EXTRACT(YEAR FROM hire_date) = 2013
+    GROUP BY employee_id
+)
+select * from cte_salary_total;
+```
