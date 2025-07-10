@@ -1912,4 +1912,19 @@ ORDER BY
 ```
 
 
+```sql
 
+WITH employee_hierarchy (EmployeeID, FirstName, LastName, ManagerID, Nivel) AS (
+  -- Anchor member
+  SELECT employee_id, first_name, last_name, manager_id, 1 as nivel
+  FROM employees
+  WHERE manager_id IS NULL
+  UNION ALL
+  -- Recursive member
+  SELECT e.employee_id, e.first_name, e.last_name, e.manager_id, eh.nivel+ 1
+  FROM employees e
+  INNER JOIN employee_hierarchy eh ON e.manager_ID = eh.employeeID
+)
+SELECT * FROM employee_hierarchy;
+
+```
