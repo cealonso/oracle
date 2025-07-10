@@ -1869,3 +1869,47 @@ select e.first_name,e.last_name, e.salary, round(depto_avg.avg_salary,2), e.depa
 on depto_avg.department_id=e.department_id where e.salary>depto_avg.avg_salary;
 
 ```
+
+```sql
+
+WITH
+  cte_departaments_2013 AS (
+    -- Primer CTE: Devuelve el employee_id que fue contratado en el año 2013.
+    SELECT
+      employee_id
+    FROM
+      EMPLOYEES
+    WHERE EXTRACT(YEAR FROM hire_date) = 2013
+  ),
+  cte_multiple_jobs AS (
+    -- Segundo CTE: Empleados que han tenido mas de un puesto dentro de la 
+    -- empresa.
+    SELECT
+      employee_id,
+      COUNT(job_id) AS count_jobs
+    FROM
+      job_history
+    GROUP BY
+      employee_id
+    HAVING
+      COUNT(job_id) > 1 
+  )
+-- Consulta final: Une los resultados de los CTEs con la tabla de empleados. Devuelve los empleados que fueron contratados en el 2013 y tuvieron mas de un puesto
+-- en la organización.
+SELECT
+  e.first_name,
+  e.last_name,
+  cte_jobs.count_jobs
+FROM
+  employees e
+  INNER JOIN cte_departaments_2013 cte_depto
+  ON e.employee_id = cte_depto.employee_id
+  INNER JOIN cte_multiple_jobs cte_jobs
+  ON e.employee_id = cte_jobs.employee_id
+ORDER BY
+  e.last_name;
+
+```
+
+
+
