@@ -1855,3 +1855,17 @@ WITH cte_salary_total AS (
 )
 select * from cte_salary_total;
 ```
+
+## Clase 10/07
+
+```sql
+
+WITH depto_avg_salary AS(
+SELECT department_id, AVG(salary) AS avg_salary
+  FROM employees
+  GROUP BY department_id
+)
+select e.first_name,e.last_name, e.salary, round(depto_avg.avg_salary,2), e.department_id from employees e inner join depto_avg_salary depto_avg 
+on depto_avg.department_id=e.department_id where e.salary>depto_avg.avg_salary;
+
+```
