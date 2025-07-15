@@ -2019,6 +2019,7 @@ END;
 
 
 -- Insertar un nuevo empleado de prueba en la tabla EMPLOYEES
+
 INSERT INTO EMPLOYEES (
     EMPLOYEE_ID,
     FIRST_NAME,
@@ -2044,6 +2045,36 @@ INSERT INTO EMPLOYEES (
     103,                        -- MANAGER_ID (Alexander Hunold - IT Manager)
     60                          -- DEPARTMENT_ID (IT Department)
 );
+
+
+-- Otro empleado
+
+INSERT INTO EMPLOYEES (
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    EMAIL,
+    PHONE_NUMBER,
+    HIRE_DATE,
+    JOB_ID,
+    SALARY,
+    COMMISSION_PCT,
+    MANAGER_ID,
+    DEPARTMENT_ID
+) VALUES (
+    3001,                        -- EMPLOYEE_ID (único, siguiente número disponible)
+    'Ezequiel',                     -- FIRST_NAME
+    'Rodriguez',                    -- LAST_NAME
+    'ERODRIGUEZ',                   -- EMAIL (único, formato estándar)
+    '4777-7777',             -- PHONE_NUMBER
+    SYSDATE,                    -- HIRE_DATE (fecha actual)
+    'IT_PROG',                  -- JOB_ID (Programador de IT)
+    10000,                       -- SALARY
+    NULL,                       -- COMMISSION_PCT (sin comisión)
+    103,                        -- MANAGER_ID (Alexander Hunold - IT Manager)
+    60                          -- DEPARTMENT_ID (IT Department)
+);
+
 
 -- Probar el trigger
 
