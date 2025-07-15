@@ -1932,6 +1932,33 @@ SELECT * FROM employee_hierarchy;
 ## Clase 15/07
 
 ```sql
+SELECT * FROM (
+    SELECT 
+        d.department_name,
+        CASE 
+            WHEN e.salary < 5000 THEN 'Bajo'
+            WHEN e.salary BETWEEN 5000 AND 10000 THEN 'Medio'
+            ELSE 'Alto'
+        END as rango_salarial,
+        e.employee_id
+    FROM employees e
+    INNER JOIN departments d ON e.department_id = d.department_id
+    WHERE d.department_name IN ('IT', 'Sales', 'Finance')
+)
+PIVOT (
+    COUNT(employee_id)
+    FOR rango_salarial IN (
+        'Bajo' AS Salario_Bajo,
+        'Medio' AS Salario_Medio,
+        'Alto' AS Salario_Alto
+    )
+) 
+ORDER BY department_name;
+
+```
+
+
+```sql
 CREATE OR REPLACE TRIGGER print_salary_changes
 BEFORE UPDATE ON employees
 FOR EACH ROW
