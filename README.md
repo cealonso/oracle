@@ -1928,3 +1928,21 @@ WITH employee_hierarchy (EmployeeID, FirstName, LastName, ManagerID, Nivel) AS (
 SELECT * FROM employee_hierarchy;
 
 ```
+
+## Clase 15/07
+
+```sql
+CREATE OR REPLACE TRIGGER print_salary_changes
+BEFORE UPDATE ON employees
+FOR EACH ROW
+DECLARE
+    sal_diff number;
+BEGIN
+    sal_diff := :new.salary - :old.salary;
+    dbms_output.put_line('Old salary: ' || :old.salary);
+    dbms_output.put_line('New salary: ' || :new.salary);
+    dbms_output.put_line('Difference ' || sal_diff);
+END;
+
+```
+
