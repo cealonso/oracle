@@ -2081,9 +2081,29 @@ INSERT INTO EMPLOYEES (
 select * from employees_audit;
 
 
-
-
 ```
 
+
+```sql
+
+-- Nueva versión del Trigger.
+
+CREATE OR REPLACE TRIGGER trg_employee_audit
+AFTER INSERT OR DELETE ON employees
+FOR EACH ROW 
+BEGIN
+  IF INSERTING THEN
+    INSERT INTO employees_audit(employee_id,action,created_by) VALUES (:new.employee_id,'inserción',user);
+  END IF;
+  IF DELETING THEN
+    INSERT INTO employees_audit(employee_id,action,created_by) VALUES (:old.employee_id,'eliminar',user);
+  END IF;
+END;
+
+-- Consultar la tabla de Auditoria
+
+select * from employees_audit;
+
+```
 
 
