@@ -1973,3 +1973,24 @@ END;
 
 ```
 
+```sql
+CREATE OR REPLACE TRIGGER print_salary_changes
+BEFORE UPDATE ON employees
+FOR EACH ROW
+DECLARE
+    sal_diff number;
+    v_percentage number;
+BEGIN
+    sal_diff := :new.salary - :old.salary;
+    dbms_output.put_line('Old salary: ' || :old.salary);
+    dbms_output.put_line('New salary: ' || :new.salary);
+    dbms_output.put_line('Difference ' || sal_diff);
+    v_percentage := round((sal_diff / :old.salary)*100,2);
+    dbms_output.put_line('Porcentaje de Diferencia '||v_percentage || '%');
+    
+END;
+
+
+
+update employees set salary=20000 where employee_id=100;
+```
