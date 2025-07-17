@@ -2107,3 +2107,62 @@ select * from employees_audit;
 ```
 
 
+## Clase 17/07
+
+```sql
+
+create or replace trigger trg_validate_salary_range
+before INSERT or UPDATE ON EMPLOYEES
+FOR EACH ROW
+DECLARE
+v_min_salary jobs.min_salary%TYPE;
+v_max_salary jobs.max_salary%TYPE;
+v_job_title jobs.job_title%TYPE;
+BEGIN
+select min_salary, max_salary, job_title into v_min_salary, v_max_salary, v_job_title from jobs where job_id = :NEW.job_id;
+IF (:NEW.salary < v_min_salary) OR (:NEW.salary > v_max_salary) THEN
+  -- El número que le doy a la EXCEPTION tiene que estar entre -20000 y -20900
+	RAISE_APPLICATION_ERROR(-20001, 'ERROR: Salario fuera de rango');
+END IF;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+  RAISE_APPLICATION_ERROR(-20002,'ERROR: job_id inexistente');
+END;
+
+--Testing 01
+
+INSERT INTO EMPLOYEES (
+    EMPLOYEE_ID,
+    FIRST_NAME,
+    LAST_NAME,
+    EMAIL,
+    PHONE_NUMBER,
+    HIRE_DATE,
+    JOB_ID,
+    SALARY,
+    COMMISSION_PCT,
+    MANAGER_ID,
+    DEPARTMENT_ID
+) VALUES (
+    300,                        -- EMPLOYEE_ID (único, siguiente número disponible)
+    'Juan',                     -- FIRST_NAME
+    'Pérez',                    -- LAST_NAME
+    'JPERE',                   -- EMAIL (único, formato estándar)
+    '555.123.4567',             -- PHONE_NUMBER
+    SYSDATE,                    -- HIRE_DATE (fecha actual)
+    'IT_PROG',                  -- JOB_ID (Programador de IT)
+    -600,                       -- SALARY
+    NULL,                       -- COMMISSION_PCT (sin comisión)
+    103,                        -- MANAGER_ID (Alexander Hunold - IT Manager)
+    60                          -- DEPARTMENT_ID (IT Department)
+);
+
+--Testing 02
+
+update employees set salary = -500 where employee_id = 100;
+
+```
+
+
+
+
