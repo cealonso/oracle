@@ -2164,5 +2164,30 @@ update employees set salary = -500 where employee_id = 100;
 ```
 
 
+```sql
 
+SELECT SYSDATE FROM DUAL;
+SELECT table_name FROM dba_tables order by table_name;
+SELECT table_name FROM all_tables;
+SELECT table_name FROM user_tables;
+SELECT table_name, owner FROM all_tables ORDER BY table_name ASC;
+SELECT table_name, owner FROM user_tables ORDER BY table_name ASC;
+SELECT column_name, data_type, data_length, nullable, data_default FROM user_tab_columns WHERE table_name = 'EMPLOYEES' ORDER BY column_id;
+SELECT * FROM user_objects;
+SELECT * FROM user_objects where object_type = 'TRIGGER';
+SELECT username, account_status FROM DBA_USERS;
+SELECT USER FROM DUAL;
+SELECT username, user_id, account_status, created, default_tablespace, temporary_tablespace, profile, authentication_type FROM DBA_USERS WHERE username = USER;
+SELECT table_name, column_name, data_type FROM user_tab_columns WHERE column_name LIKE '%EMAIL%';
+SELECT table_name, column_name, data_type FROM user_tab_columns;
+SELECT table_name, column_name, data_type FROM user_tab_columns WHERE data_type = 'DATE';
+SELECT table_name, column_name, data_type FROM user_tab_columns WHERE data_type = 'VARCHAR2';
+SELECT * from user_objects where object_type='PROCEDURE';
+SELECT * from user_objects where object_type='TRIGGER';
+SELECT FROM user_triggers WHERE table_name = 'EMPLOYEES';
+SELECT * FROM user_triggers WHERE triggering_event LIKE '%UPDATE%';
+SELECT object_type, object_name, last_ddl_time FROM user_objects WHERE last_ddl_time >= TRUNC (SYSDATE) ORDER BY object_type, object_name;
+SELECT type, name FROM user_dependencies WHERE  referenced_name = 'EMPLOYEES' ORDER BY type, name;
+
+```
 
