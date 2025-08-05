@@ -2191,3 +2191,26 @@ SELECT type, name FROM user_dependencies WHERE  referenced_name = 'EMPLOYEES' OR
 
 ```
 
+## Clase 05/08
+
+```sql
+sqlplus / as sysdba
+
+sql>select 2+2;
+
+show user;
+
+show con_name;
+
+SELECT con_id, name from v$pdbs;
+
+sql> connect system/maria123456@Aula21PC10:1521;
+
+show user;
+
+exit;
+
+c:\>sqlplus system/maria123456@Aula21PC10:1521
+
+show user;
+```
