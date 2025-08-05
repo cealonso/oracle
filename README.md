@@ -2194,23 +2194,25 @@ SELECT type, name FROM user_dependencies WHERE  referenced_name = 'EMPLOYEES' OR
 ## Clase 05/08
 
 ```sql
-sqlplus / as sysdba
+--Dentro de CMD
+
+c:\>sqlplus / as sysdba
 
 sql>select 2+2;
 
-show user;
+sql>show user;
 
-show con_name;
+sql>show con_name;
 
-SELECT con_id, name from v$pdbs;
+sql>SELECT con_id, name from v$pdbs;
 
 sql> connect system/maria123456@Aula21PC10:1521;
 
-show user;
+sql>show user;
 
-exit;
+sql>exit;
 
 c:\>sqlplus system/maria123456@Aula21PC10:1521
 
-show user;
+sql>show user;
 ```
