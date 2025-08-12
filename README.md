@@ -2216,3 +2216,85 @@ c:\>sqlplus system/maria123456@Aula21PC10:1521
 
 sql>show user;
 ```
+
+## Clase 12/08
+
+```sql
+
+
+C:\>sqlplus / as sysdba
+
+sql> select name, log_mode from v$database;
+
+
+NAME      LOG_MODE
+--------- ------------
+FREE      NOARCHIVELOG
+
+sql> shutdown immediate; 
+
+sql> startup mount;
+
+sql> alter database archivelog;
+
+sql> select name, log_mode from v$database;
+
+NAME      LOG_MODE
+--------- ------------
+FREE      ARCHIVELOG
+
+
+sql> alter database open;
+
+
+rman/backup
+
+c:\> rman target /
+
+
+rman>show all;
+
+rman>configure channel device type disk format 'c:\rman\backup/%d_%T_%u';
+
+rman>show all;
+
+rman>backup database plus archivelog tag='FULL_BACKUP_Ago_2025';
+
+rman>list backup;
+
+rman>list backup tag='FULL_BACKUP_Ago_2025';
+
+c:\> sqlplus / as sysdba
+
+sql>shutdown immediate; 
+----------------------------------------------
+--SYSTEM01.DBF Renombrar por el SYSTEM01.XXX--
+----------------------------------------------
+
+sql> shutdown abort;
+
+sql>startup mount;
+
+c:\>rman target /
+
+rman> restore database;
+
+rman> recover database;
+
+rman> exit;
+
+c:\>sqlplus / as sysdba
+
+sql>alter database open;
+
+c:\>rman target /
+
+rman>backup incremental level 0 database tag='BACKUP_INC_00';
+
+rman>backup incremental level 1 database tag='BACKUP_INC_01';
+
+rman> list backup;
+
+```
+
+
