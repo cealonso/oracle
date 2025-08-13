@@ -2295,6 +2295,23 @@ rman>backup incremental level 1 database tag='BACKUP_INC_01';
 
 rman> list backup;
 
+quiero realizar un backup en oracle23 encriptado por contraseña como lo puedo hacer?
+
+
+RMAN> CONFIGURE ENCRYPTION FOR DATABASE ON;
+RMAN> CONFIGURE ENCRYPTION ALGORITHM 'AES256';
+RMAN> SET ENCRYPTION ON IDENTIFIED BY "tu_contraseña_segura" ONLY;
+RMAN> backup database tag='FULL_BACKUP_ENC';
+
+SQL>sqlplus / as sysdba
+SQL>shutdown abort;
+SQL>startup mount;
+
+RMAN> SET DECRYPTION IDENTIFIED BY "tu_contraseña_segura";
+RMAN> RESTORE DATABASE;
+RMAN> RECOVER DATABASE;
+
+
 ```
 
 
