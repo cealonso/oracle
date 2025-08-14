@@ -2314,4 +2314,59 @@ RMAN> RECOVER DATABASE;
 
 ```
 
+## Clase 14/08
+
+```sql
+
+c:\orabackup (Directorio Fisico)
+
+c:\> sqlplus / as sysdba
+
+sql> create directory backup2025 as 'c:\orabackup';
+
+(En otra terminal):
+
+c:\>sqlplus system/maria123456@Aula21PC10:1521/freepdb1
+
+sql>grant read,write on directory backup2025 to hr_admin;
+
+
+sql> select * from dba_directories;
+
+(export datadump: dump, log)
+
+c:\>expdp hr_admin/pwd123456hr@Aula21pc11:1521/freepdb1 schemas=hr_admin directory=backup2025 dumpfile=hr.dump logfile=hr.log
+
+
+(import datadump)
+
+
+c:\>sqlplus / as sysdba
+
+sql>alter session set container=freepdb1;
+
+
+sql> create user user_operation identified by pwdOracle123456;
+
+sql> grant create session to user_operation with admin option;
+
+sql> grant connect, resource,dba to user_operation;
+
+sql> grant unlimited tablespace to user_operation;
+
+
+sql>exit;
+
+
+c:\> impdp user_operation/pwdOracle123456@Aula21PC10:1521/freepdb1 directory=backup2025 dumpfile=hr.dump logfile=hr.log  remap_schema=hr_admin:user_operation table_exists_actions=replace    
+
+
+```
+
+
+
+
+
+
+
 
